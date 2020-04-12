@@ -52,6 +52,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\CryptoLearn\DeviceRepository.cs" />
+    <Compile Include="Repository\CryptoLearn\LanguageRepository.cs" />
+    <Compile Include="Repository\CryptoLearn\LessonDescriptionRepository.cs" />
+    <Compile Include="Repository\CryptoLearn\LessonQuestionAndOptionRepository.cs" />
+    <Compile Include="Repository\CryptoLearn\LessonRepository.cs" />
+    <Compile Include="Repository\CryptoLearn\SectionRepository.cs" />
     <Compile Include="Repository\General\Repository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -64,9 +70,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repository\CryptoLearn\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
