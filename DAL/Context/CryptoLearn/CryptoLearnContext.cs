@@ -1,7 +1,8 @@
-﻿using DataLayer.Domain.CryptoLearn.Context.Configuration;
+﻿using DAL.Context.CryptoLearn.Configuration;
+using DAL.Domain.CryptoLearn;
 using System.Data.Entity;
 
-namespace DataLayer.Domain.CryptoLearn.Context
+namespace DAL.Context.CryptoLearn
 {
     public class CryptoLearnContext : DbContext
     {
@@ -48,5 +49,3 @@ namespace DataLayer.Domain.CryptoLearn.Context
         }
     }
 }
-
-//  enable-migrations -ContextProjectName MyProject.DBContexts -contexttypename MyProject.DBContexts.MyContextName -Verbose

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
-namespace DataLayer.Domain.CryptoLearn
-{
+namespace DAL.Domain.CryptoLearn
+{ 
     public class Lesson
     {
         public int Id { get; set; }

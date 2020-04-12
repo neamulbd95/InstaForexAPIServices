@@ -1,6 +1,7 @@
-﻿using System.Data.Entity.ModelConfiguration;
+﻿using DAL.Domain.CryptoLearn;
+using System.Data.Entity.ModelConfiguration;
 
-namespace DataLayer.Domain.CryptoLearn.Context.Configuration
+namespace DAL.Context.CryptoLearn.Configuration
 {
     public class DeviceConfiguration : EntityTypeConfiguration<Device>
     {

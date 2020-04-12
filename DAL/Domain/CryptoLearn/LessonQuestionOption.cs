@@ -1,4 +1,4 @@
-﻿namespace DataLayer.Domain.CryptoLearn
+﻿namespace DAL.Domain.CryptoLearn
 {
     public class LessonQuestionOption
     {

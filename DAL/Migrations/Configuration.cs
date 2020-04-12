@@ -5,14 +5,14 @@
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<DataLayer.Domain.CryptoLearn.Context.CryptoLearnContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Context.CryptoLearn.CryptoLearnContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(DataLayer.Domain.CryptoLearn.Context.CryptoLearnContext context)
+        protected override void Seed(Context.CryptoLearn.CryptoLearnContext context)
         {
             //  This method will be called after migrating to the latest version.
 
