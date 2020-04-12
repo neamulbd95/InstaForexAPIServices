@@ -73,12 +73,21 @@
     <Compile Include="Domain\CryptoLearn\LessonQuestionOption.cs" />
     <Compile Include="Domain\CryptoLearn\LessonView.cs" />
     <Compile Include="Domain\CryptoLearn\Section.cs" />
+    <Compile Include="Migrations\202004121749495_AddingTablesToTheDatabase.cs" />
+    <Compile Include="Migrations\202004121749495_AddingTablesToTheDatabase.designer.cs">
+      <DependentUpon>202004121749495_AddingTablesToTheDatabase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202004121749495_AddingTablesToTheDatabase.resx">
+      <DependentUpon>202004121749495_AddingTablesToTheDatabase.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
