@@ -59,6 +59,7 @@
     <Compile Include="Repository\CryptoLearn\LessonRepository.cs" />
     <Compile Include="Repository\CryptoLearn\SectionRepository.cs" />
     <Compile Include="Repository\General\Repository.cs" />
+    <Compile Include="UnitOfWork\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">
