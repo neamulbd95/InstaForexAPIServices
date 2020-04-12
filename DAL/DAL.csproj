@@ -40,6 +40,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -51,6 +54,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComplexTypeClasses\CryptoLearn\LessonDescriptionsDetail.cs" />
+    <Compile Include="ComplexTypeClasses\CryptoLearn\LessonDetails.cs" />
+    <Compile Include="ComplexTypeClasses\CryptoLearn\LessonDetailsWithImage.cs" />
+    <Compile Include="ComplexTypeClasses\CryptoLearn\LessonQuestionOptionAnswerDetails.cs" />
+    <Compile Include="ComplexTypeClasses\CryptoLearn\LessonQuestionOptions.cs" />
+    <Compile Include="ComplexTypeClasses\CryptoLearn\LessonQuestionsDetails.cs" />
     <Compile Include="Context\CryptoLearn\Configuration\DeviceConfiguration.cs" />
     <Compile Include="Context\CryptoLearn\Configuration\ImageConfiguration.cs" />
     <Compile Include="Context\CryptoLearn\Configuration\LanguageConfiguration.cs" />
@@ -73,6 +82,13 @@
     <Compile Include="Domain\CryptoLearn\LessonQuestionOption.cs" />
     <Compile Include="Domain\CryptoLearn\LessonView.cs" />
     <Compile Include="Domain\CryptoLearn\Section.cs" />
+    <Compile Include="IRepositories\CryptoLearn\IDeviceRepository.cs" />
+    <Compile Include="IRepositories\CryptoLearn\ILanguageRepository.cs" />
+    <Compile Include="IRepositories\CryptoLearn\ILessonDescriptionRepository.cs" />
+    <Compile Include="IRepositories\CryptoLearn\ILessonQuestionAndOptionRepository.cs" />
+    <Compile Include="IRepositories\CryptoLearn\ILessonRepository.cs" />
+    <Compile Include="IRepositories\CryptoLearn\ISectionRepository.cs" />
+    <Compile Include="IRepositories\General\IRepository.cs" />
     <Compile Include="Migrations\202004121749495_AddingTablesToTheDatabase.cs" />
     <Compile Include="Migrations\202004121749495_AddingTablesToTheDatabase.designer.cs">
       <DependentUpon>202004121749495_AddingTablesToTheDatabase.cs</DependentUpon>
@@ -89,6 +105,7 @@
       <DependentUpon>202004121749495_AddingTablesToTheDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
