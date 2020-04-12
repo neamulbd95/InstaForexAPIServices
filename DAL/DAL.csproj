@@ -41,6 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\CryptoLearn\Device.cs" />
+    <Compile Include="Domain\CryptoLearn\Image.cs" />
+    <Compile Include="Domain\CryptoLearn\Language.cs" />
+    <Compile Include="Domain\CryptoLearn\Lesson.cs" />
+    <Compile Include="Domain\CryptoLearn\LessonDescription.cs" />
+    <Compile Include="Domain\CryptoLearn\LessonDescriptionDiagram.cs" />
+    <Compile Include="Domain\CryptoLearn\LessonLike.cs" />
+    <Compile Include="Domain\CryptoLearn\LessonQuestion.cs" />
+    <Compile Include="Domain\CryptoLearn\LessonQuestionOption.cs" />
+    <Compile Include="Domain\CryptoLearn\LessonView.cs" />
+    <Compile Include="Domain\CryptoLearn\Section.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
