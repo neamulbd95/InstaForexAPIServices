@@ -73,6 +73,7 @@
     <Compile Include="Domain\CryptoLearn\LessonQuestionOption.cs" />
     <Compile Include="Domain\CryptoLearn\LessonView.cs" />
     <Compile Include="Domain\CryptoLearn\Section.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
