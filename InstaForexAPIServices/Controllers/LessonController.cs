@@ -1,10 +1,13 @@
-﻿using DAL.UnitOfWork;
+﻿using DAL.ComplexTypeClasses.CryptoLearn;
+using DAL.UnitOfWork;
+using InstaForexAPIServices.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Unity;
 
 namespace InstaForexAPIServices.Controllers
 {
@@ -18,14 +21,27 @@ namespace InstaForexAPIServices.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GetLessonById(int lessonId)
+        public GeneralResponse<LessonDetails> GetLessonById(int lessonId)
         {
-            if(lessonId < 1)
+            IUnityContainer container = new UnityContainer();
+            if (lessonId < 1)
             {
-                return Content(HttpStatusCode.BadRequest, "ID can not be less that 1");
+                var result = container.Resolve<GeneralResponse<LessonDetails>>();
+                result.ResponseCode = HttpStatusCode.BadRequest;
+                result.ResponseMessage = "ID can not be less than 1.";
+                result.Result = null;
+
+                return result;
             }
-            var result = _unitofwork.Lessons.GetLessonWithBook(lessonId);
-            return Ok(result);
+            else
+            {
+                var result = container.Resolve<GeneralResponse<LessonDetails>>();
+                result.ResponseCode = HttpStatusCode.OK;
+                result.ResponseMessage = "Request is okay";
+                result.Result = _unitofwork.Lessons.GetLessonWithBook(lessonId);
+
+                return result;
+            }
         }
     }
 }
