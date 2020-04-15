@@ -1,4 +1,8 @@
-﻿using System.Web.Http;
+﻿using DAL.UnitOfWork;
+using InstaForexAPIServices.Unity;
+using ServiceLayer.UnitOfWork;
+using System.Web.Http;
+using Unity;
 
 namespace InstaForexAPIServices
 {
@@ -7,6 +11,9 @@ namespace InstaForexAPIServices
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            var container = new UnityContainer();
+            container.RegisterType<IUnitOfWork, UnitOfWork>();
+            config.DependencyResolver = new UnityResolver(container);
 
             // Web API routes
             config.MapHttpAttributeRoutes();
