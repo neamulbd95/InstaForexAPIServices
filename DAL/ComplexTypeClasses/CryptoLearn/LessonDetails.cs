@@ -10,10 +10,10 @@ namespace DAL.ComplexTypeClasses.CryptoLearn
         [JsonProperty(PropertyName = "lessonName")]
         public string LessonName { get; set; }
 
-        [JsonProperty(PropertyName = "bookId")]
+        [JsonProperty(PropertyName = "sectionId")]
         public int SectionId { get; set; }
 
-        [JsonProperty(PropertyName = "bookName")]
+        [JsonProperty(PropertyName = "sectionName")]
         public string SectionName { get; set; }
 
         [JsonProperty(PropertyName = "readDuration")]
