@@ -240,6 +240,7 @@ namespace InstaForexAPIServices
                         // "apiKeyIn" can either be "query" or "header"                                                
                         //
                         //c.EnableApiKeySupport("apiKey", "header");
+                        c.InjectJavaScript(thisAssembly, "InstaForexAPIServices.Content.CustomSwagger.css");
                     });
         }
     }

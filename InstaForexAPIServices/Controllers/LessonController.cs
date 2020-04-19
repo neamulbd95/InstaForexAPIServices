@@ -1,7 +1,6 @@
 ﻿using DAL.ComplexTypeClasses.CryptoLearn;
 using DAL.UnitOfWork;
 using InstaForexAPIServices.Response;
-using System;
 using System.Net;
 using System.Web.Http;
 using Unity;
@@ -44,6 +43,7 @@ namespace InstaForexAPIServices.Controllers
 
 
         [HttpGet]
+        [Route("api/CryptoLearn/v1/LessonByBook")]
         public IHttpActionResult GetLessonByBook(int bookId, string lang)
         {
             if (bookId < 1 || string.IsNullOrEmpty(lang))
