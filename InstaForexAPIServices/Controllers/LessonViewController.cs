@@ -67,5 +67,27 @@ namespace InstaForexAPIServices.Controllers
 
             return result;
         }
+
+        [HttpGet]
+        [Route("api/CryptoLearn/v1/BookTotalView")]
+        public GeneralResponse<int> GetSectionTotalView(int sectionId)
+        {
+            int totalView = 0;
+            var result = container.Resolve<GeneralResponse<int>>();
+
+            var lessons = _unitOfWork.Lessons.GetByCondition(x => x.SectionId == sectionId);
+
+            foreach(var les in lessons)
+            {
+                totalView += _unitOfWork.Views.GetLessonTotalViews(les.Id);
+            }
+            IList<int> View = new List<int>();
+            View.Add(totalView);
+
+            result.ResponseCode = HttpStatusCode.OK;
+            result.ResponseMessage = "Requst input is okay";
+            result.Result = View;
+            return result;
+        }
     }
 }
