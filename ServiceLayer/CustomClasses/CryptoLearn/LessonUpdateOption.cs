@@ -1,10 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace InstaForexAPIServices.Response.CryptoLearn
+﻿namespace ServiceLayer.CustomClasses.CryptoLearn
 {
     public class LessonUpdateOption
     {

@@ -1,9 +1,7 @@
-﻿using System;
+﻿using DAL.ComplexTypeClasses.CryptoLearn;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace InstaForexAPIServices.Response.CryptoLearn
+namespace ServiceLayer.CustomClasses.CryptoLearn
 {
     public class LessonUpdateDetails
     {
@@ -17,14 +15,14 @@ namespace InstaForexAPIServices.Response.CryptoLearn
             this.AddTime = 0;
             this.ImageURL = "";
         }
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string LessonName { get; set; }
-        public int SectionId { get; set; }
-        public int LanguageId { get; set; }
+        public int? SectionId { get; set; }
+        public int? LanguageId { get; set; }
         public string ReadDuration { get; set; }
-        public int AddTime { get; set; }
-        public IEnumerable<LessonUpdateDescription> LessonDescriptions { get; set; }
+        public int? AddTime { get; set; }
+        public IEnumerable<LessonDescriptionsDetail> LessonDescriptions { get; set; }
         public string ImageURL { get; set; }
-        public IEnumerable<LessonUpdateQuestion> Questions { get; set; }
+        public IEnumerable<LessonQuestionOptionAnswerDetails> Questions { get; set; }
     }
 }

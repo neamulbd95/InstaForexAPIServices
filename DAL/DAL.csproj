@@ -107,6 +107,7 @@
     <Compile Include="IRepositories\CryptoLearn\IDeviceRepository.cs" />
     <Compile Include="IRepositories\CryptoLearn\ILanguageRepository.cs" />
     <Compile Include="IRepositories\CryptoLearn\ILessonDescriptionRepository.cs" />
+    <Compile Include="IRepositories\CryptoLearn\ILessonImageRepository.cs" />
     <Compile Include="IRepositories\CryptoLearn\ILessonQuestionAndOptionRepository.cs" />
     <Compile Include="IRepositories\CryptoLearn\ILessonRepository.cs" />
     <Compile Include="IRepositories\CryptoLearn\ISectionRepository.cs" />

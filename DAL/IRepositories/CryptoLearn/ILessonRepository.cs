@@ -10,6 +10,7 @@ namespace DAL.IRepositories.CryptoLearn
         IEnumerable<LessonDetails> GetLessonWithBook(int lessonId);
         IEnumerable<LessonDetails> GetLessonsByBookAndLanguage(int sectionId, int langId);
         IEnumerable<LessonDetailsWithImage> GetLessonsWithImageByBookAndLanguage(int sectionId, int langId);
+        //IEnumerable<LessonUpdateDetails> GetLessonDetails(int timeStamp);
         int LessonCount(int langId);
         int MaxAddedTime();
     }

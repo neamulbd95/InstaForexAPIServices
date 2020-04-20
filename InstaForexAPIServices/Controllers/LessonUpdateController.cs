@@ -1,14 +1,14 @@
-﻿using DAL.UnitOfWork;
+﻿using DAL.Domain.CryptoLearn;
+using DAL.UnitOfWork;
 using InstaForexAPIServices.ENum;
 using InstaForexAPIServices.RequestInputClass.CryptoLearn;
 using InstaForexAPIServices.Response;
 using InstaForexAPIServices.Response.CryptoLearn;
-using System;
-using System.Collections;
+using ServiceLayer.CustomClasses.CryptoLearn;
+using ServiceLayer.Services.CryptoLearn;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using Unity;
 
@@ -63,6 +63,94 @@ namespace InstaForexAPIServices.Controllers
 
             return result;
         }
-        
+
+        [HttpPost]
+        [Route("api/CryptoLearn/v1/AddLesson")]
+        public GeneralResponse<UpdatedLesson> AddLesson(LessonUpdateCheck checkUpdate)
+        {
+            var result = container.Resolve<GeneralResponse<UpdatedLesson>>();
+            if (checkUpdate.ClientTimeStamp == 0)
+            {
+                result.ResponseCode = HttpStatusCode.BadRequest;
+                result.ResponseMessage = "Invaild Input.";
+                result.Result = null;
+
+                return result;
+            }
+
+            int langId = _unitOfWork.Languages.GetLanguageId(x => x.LanguageName.ToUpper() == checkUpdate.Language.ToUpper()).Id;
+
+            if(langId == 0)
+            {
+                result.ResponseCode = HttpStatusCode.BadRequest;
+                result.ResponseMessage = "Invaild Input.";
+                result.Result = null;
+            }
+
+            IList<Lesson> newLessons = _unitOfWork.Lessons.GetByCondition(x=> x.AddTime > checkUpdate.ClientTimeStamp).ToList();
+
+            List<LessonUpdateDetails> newLessonsDetails = container.Resolve<List<LessonUpdateDetails>>();
+
+            foreach(var item in newLessons)
+            {
+                var newLessonDetails = LessonDetailsService.GetLessonDetails(_unitOfWork,item,langId);
+                newLessonsDetails.Add(newLessonDetails);
+            }
+
+            var updatedResponse = container.Resolve<UpdatedLesson>();
+            updatedResponse.NewLesson = newLessonsDetails;
+            updatedResponse.NewUpdatedTimeStamp = _unitOfWork.Lessons.MaxAddedTime();
+
+            result.ResponseCode = HttpStatusCode.OK;
+            result.ResponseMessage = "Request input is okay.";
+            result.Result = (IEnumerable<UpdatedLesson>)updatedResponse;
+
+            return result;
+        }
+
+
+        [HttpPost]
+        [Route("api/CryptoLearn/v1/UpdateLesson")]
+        public GeneralResponse<UpdatedLesson> UpdateLesson(LessonUpdateCheck checkUpdate)
+        {
+            var result = container.Resolve<GeneralResponse<UpdatedLesson>>();
+            if (checkUpdate.ClientTimeStamp == 0)
+            {
+                result.ResponseCode = HttpStatusCode.BadRequest;
+                result.ResponseMessage = "Invaild Input.";
+                result.Result = null;
+
+                return result;
+            }
+
+            int langId = _unitOfWork.Languages.GetLanguageId(x => x.LanguageName.ToUpper() == checkUpdate.Language.ToUpper()).Id;
+
+            if (langId == 0)
+            {
+                result.ResponseCode = HttpStatusCode.BadRequest;
+                result.ResponseMessage = "Invaild Input.";
+                result.Result = null;
+            }
+
+            IList<Lesson> newLessons = _unitOfWork.Lessons.GetByCondition(x => x.AddTime > checkUpdate.ClientTimeStamp).ToList();
+
+            List<LessonUpdateDetails> newLessonsDetails = container.Resolve<List<LessonUpdateDetails>>();
+
+            foreach (var item in newLessons)
+            {
+                var newLessonDetails = LessonDetailsService.GetLessonDetails(_unitOfWork, item, langId);
+                newLessonsDetails.Add(newLessonDetails);
+            }
+
+            var updatedResponse = container.Resolve<UpdatedLesson>();
+            updatedResponse.NewLesson = newLessonsDetails;
+            updatedResponse.NewUpdatedTimeStamp = _unitOfWork.Lessons.MaxAddedTime();
+
+            result.ResponseCode = HttpStatusCode.OK;
+            result.ResponseMessage = "Request input is okay.";
+            result.Result = (IEnumerable<UpdatedLesson>)updatedResponse;
+
+            return result;
+        }
     }
 }

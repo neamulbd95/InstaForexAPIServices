@@ -181,11 +181,8 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestInputClass\CryptoLearn\LessonUpdateCheck.cs" />
-    <Compile Include="Response\CryptoLearn\LessonUpdateDescription.cs" />
-    <Compile Include="Response\CryptoLearn\LessonUpdateDetails.cs" />
-    <Compile Include="Response\CryptoLearn\LessonUpdateOption.cs" />
-    <Compile Include="Response\CryptoLearn\LessonUpdateQuestion.cs" />
     <Compile Include="Response\CryptoLearn\LessonUpdateStatus.cs" />
+    <Compile Include="Response\CryptoLearn\UpdatedLesson.cs" />
     <Compile Include="Response\GeneralResponse.cs" />
     <Compile Include="Unity\UnityResolver.cs" />
   </ItemGroup>

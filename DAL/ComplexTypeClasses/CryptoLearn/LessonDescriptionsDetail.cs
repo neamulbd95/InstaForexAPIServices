@@ -4,6 +4,13 @@ namespace DAL.ComplexTypeClasses.CryptoLearn
 {
     public class LessonDescriptionsDetail
     {
+        public LessonDescriptionsDetail()
+        {
+            this.Title = "";
+            this.Description = "";
+            this.Diagram = "";
+            this.Caption = "";
+        }
         [JsonProperty(PropertyName = "title")]
         public string Title { get; set; }
 

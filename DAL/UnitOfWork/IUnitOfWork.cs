@@ -11,6 +11,7 @@ namespace DAL.UnitOfWork
         ILessonDescriptionRepository LessonDescriptions { get; }
         ILessonQuestionAndOptionRepository LessonQuestionsDetails { get; }
         ISectionRepository Sections { get; }
+        ILessonImageRepository Images { get; }
 
         int Complete();
     }
