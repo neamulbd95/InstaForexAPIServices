@@ -25,6 +25,7 @@ namespace InstaForexAPIServices.Controllers
         }
 
         [HttpPost]
+        [Route("api/CryptoLearn/v1/CheckUpdate")]
         public GeneralResponse<LessonUpdateStatus> CheckUpdate(LessonUpdateCheck check)
         {
             var result = container.Resolve<GeneralResponse<LessonUpdateStatus>>();
@@ -62,5 +63,6 @@ namespace InstaForexAPIServices.Controllers
 
             return result;
         }
+        
     }
 }
