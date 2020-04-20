@@ -32,5 +32,17 @@ namespace InstaForexAPIServices.Controllers
             result.Result = _unitOfWork.Devices.GetAll();
             return result;
         }
+
+        [HttpGet]
+        [Route("api/CryptoLearn/v1/GetDeviceById")]
+        public GeneralResponse<Device> GetDeviceId(int id)
+        {
+            var result = container.Resolve<GeneralResponse<Device>>();
+
+            result.ResponseCode = HttpStatusCode.OK;
+            result.ResponseMessage = "Request is okay";
+            result.Result = (IEnumerable<Device>)_unitOfWork.Devices.GetByID(id);
+            return result;
+        }
     }
 }
