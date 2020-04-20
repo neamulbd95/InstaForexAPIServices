@@ -44,5 +44,39 @@ namespace InstaForexAPIServices.Controllers
             result.Result = (IEnumerable<Device>)_unitOfWork.Devices.GetByID(id);
             return result;
         }
+
+        [HttpPost]
+        [Route("api/CryptoLearn/v1/AddDevice")]
+        public GeneralResponse<Device> AddDeivce(Device device)
+        {
+            var result = container.Resolve<GeneralResponse<Device>>();
+
+            if (!ModelState.IsValid)
+            {
+                result.ResponseCode = HttpStatusCode.BadRequest;
+                result.ResponseMessage = "Invalid Request";
+                result.Result = null;
+                return result;
+            }
+
+            var dev = _unitOfWork.Devices.GetSingle(x => x.DeviceToken == device.DeviceToken);
+            if(dev == null)
+            {
+                _unitOfWork.Devices.Add(dev);
+                _unitOfWork.Complete();
+
+                result.ResponseCode = HttpStatusCode.OK;
+                result.ResponseMessage = "Request is okay";
+                result.Result = (IEnumerable<Device>)_unitOfWork.Devices.GetByID(dev.Id);
+                return result;
+            }     
+            else
+            {
+                result.ResponseCode = HttpStatusCode.Conflict;
+                result.ResponseMessage = "This device has been already registered";
+                result.Result = (IEnumerable<Device>)_unitOfWork.Devices.GetByID(dev.Id);
+                return result;
+            }
+        }
     }
 }
