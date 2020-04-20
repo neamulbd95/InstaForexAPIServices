@@ -92,11 +92,14 @@
     <Compile Include="Repository\CryptoLearn\LanguageRepository.cs" />
     <Compile Include="Repository\CryptoLearn\LessonDescriptionRepository.cs" />
     <Compile Include="Repository\CryptoLearn\LessonImageRepository.cs" />
+    <Compile Include="Repository\CryptoLearn\LessonLikeRepository.cs" />
     <Compile Include="Repository\CryptoLearn\LessonQuestionAndOptionRepository.cs" />
     <Compile Include="Repository\CryptoLearn\LessonRepository.cs" />
+    <Compile Include="Repository\CryptoLearn\LessonViewRepository.cs" />
     <Compile Include="Repository\CryptoLearn\SectionRepository.cs" />
     <Compile Include="Repository\General\Repository.cs" />
     <Compile Include="Services\CryptoLearn\LessonDetailsService.cs" />
+    <Compile Include="Services\CryptoLearn\LessonViewServices.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>

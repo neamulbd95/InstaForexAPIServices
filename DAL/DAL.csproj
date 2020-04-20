@@ -108,9 +108,11 @@
     <Compile Include="IRepositories\CryptoLearn\ILanguageRepository.cs" />
     <Compile Include="IRepositories\CryptoLearn\ILessonDescriptionRepository.cs" />
     <Compile Include="IRepositories\CryptoLearn\ILessonImageRepository.cs" />
+    <Compile Include="IRepositories\CryptoLearn\ILessonLikeRepository.cs" />
     <Compile Include="IRepositories\CryptoLearn\ILessonQuestionAndOptionRepository.cs" />
     <Compile Include="IRepositories\CryptoLearn\ILessonRepository.cs" />
     <Compile Include="IRepositories\CryptoLearn\ISectionRepository.cs" />
+    <Compile Include="IRepositories\CryptoLearn\ILessonViewRepository.cs" />
     <Compile Include="IRepositories\General\IRepository.cs" />
     <Compile Include="Migrations\202004121749495_AddingTablesToTheDatabase.cs" />
     <Compile Include="Migrations\202004121749495_AddingTablesToTheDatabase.designer.cs">

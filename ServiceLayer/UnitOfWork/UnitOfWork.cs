@@ -19,6 +19,8 @@ namespace ServiceLayer.UnitOfWork
             LessonQuestionsDetails = new LessonQuestionAndOptionRepository(context);
             Sections = new SectionRepository(context);
             Images = new LessonImageRepository(context);
+            Views = new LessonViewRepository(context);
+            Likes = new LessonLikeRepository(context);
         }
         public IDeviceRepository Devices { get; private set; }
         public ILanguageRepository Languages { get; private set; }
@@ -27,6 +29,8 @@ namespace ServiceLayer.UnitOfWork
         public ILessonQuestionAndOptionRepository LessonQuestionsDetails { get; private set; }
         public ISectionRepository Sections { get; private set; }
         public ILessonImageRepository Images { get; private set; }
+        public ILessonViewRepository Views { get; private set; }
+        public ILessonLikeRepository Likes { get; private set; }
 
         public int Complete()
         {

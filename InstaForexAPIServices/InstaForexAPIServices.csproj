@@ -176,12 +176,14 @@
     <Compile Include="Controllers\LessonController.cs" />
     <Compile Include="Controllers\LessonDescriptionController.cs" />
     <Compile Include="Controllers\LessonUpdateController.cs" />
+    <Compile Include="Controllers\LessonViewController.cs" />
     <Compile Include="ENum\LessonUpdateENum.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestInputClass\CryptoLearn\LessonUpdateCheck.cs" />
+    <Compile Include="RequestInputClass\CryptoLearn\LikeViewRequest.cs" />
     <Compile Include="Response\CryptoLearn\LessonUpdateStatus.cs" />
     <Compile Include="Response\CryptoLearn\UpdatedLesson.cs" />
     <Compile Include="Response\GeneralResponse.cs" />
