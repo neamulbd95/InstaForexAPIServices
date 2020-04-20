@@ -5,6 +5,6 @@ namespace DAL.IRepositories.CryptoLearn
 {
     public interface ILessonViewRepository : IRepository<LessonView>
     {
-
+        int GetLessonTotalViews(int lessonId);
     }
 }

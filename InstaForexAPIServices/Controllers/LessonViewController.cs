@@ -4,7 +4,9 @@ using InstaForexAPIServices.RequestInputClass.CryptoLearn;
 using InstaForexAPIServices.Response;
 using ServiceLayer.Services.CryptoLearn;
 using System;
+using System.Collections.Generic;
 using System.Web.Http;
+using System.Net;
 using Unity;
 
 namespace InstaForexAPIServices.Controllers
@@ -48,6 +50,22 @@ namespace InstaForexAPIServices.Controllers
             }
 
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("api/CryptoLearn/v1/LessonTotalView")]
+        public GeneralResponse<int> GetLessonTotalView(int lessonId)
+        {
+            var result = container.Resolve<GeneralResponse<int>>();
+
+            IList<int> totalView = new List<int>();
+            totalView.Add(_unitOfWork.Views.GetLessonTotalViews(lessonId));
+
+            result.ResponseCode = HttpStatusCode.OK;
+            result.ResponseMessage = "Requst input is okay";
+            result.Result = totalView;
+
+            return result;
         }
     }
 }
