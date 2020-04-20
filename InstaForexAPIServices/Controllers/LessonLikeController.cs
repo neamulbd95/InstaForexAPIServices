@@ -65,5 +65,51 @@ namespace InstaForexAPIServices.Controllers
 
             return result;
         }
+
+        [HttpPost]
+        [Route("api/CryptoLearn/v1/CheckLike")]
+        public GeneralResponse<bool> CheckingLike(LikeViewRequest input)
+        {
+            Device device = _unitOfWork.Devices.GetSingle(x => x.DeviceToken == input.DeviceToken);
+
+            if(device == null)
+            {
+                var result = container.Resolve<GeneralResponse<bool>>();
+                result.ResponseCode = HttpStatusCode.NotFound;
+                result.ResponseMessage = "Wrong Device Token";
+                result.Result = null;
+
+                return result;
+            }
+            else
+            {
+                LessonLike likes = _unitOfWork.Likes.GetSingle(x => x.LessonId == input.LessonId && x.DeviceId == device.Id);
+                if(likes == null)
+                {
+                    var checkLike = new List<bool>();
+                    checkLike.Add(false);
+
+                    var result = container.Resolve<GeneralResponse<bool>>();
+                    result.ResponseCode = HttpStatusCode.OK;
+                    result.ResponseMessage = "Request is okay";
+                    result.Result = checkLike;
+
+                    return result;
+                }
+
+                else
+                {
+                    var checkLike = new List<bool>();
+                    checkLike.Add(likes.CheckLike);
+
+                    var result = container.Resolve<GeneralResponse<bool>>();
+                    result.ResponseCode = HttpStatusCode.OK;
+                    result.ResponseMessage = "Request is okay";
+                    result.Result = checkLike;
+
+                    return result;
+                }
+            }
+        }
     }
 }
