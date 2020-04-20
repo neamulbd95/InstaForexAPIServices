@@ -175,6 +175,7 @@
     <Compile Include="Controllers\DeviceController.cs" />
     <Compile Include="Controllers\LessonController.cs" />
     <Compile Include="Controllers\LessonDescriptionController.cs" />
+    <Compile Include="Controllers\LessonLikeController.cs" />
     <Compile Include="Controllers\LessonUpdateController.cs" />
     <Compile Include="Controllers\LessonViewController.cs" />
     <Compile Include="ENum\LessonUpdateENum.cs" />

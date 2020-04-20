@@ -99,6 +99,7 @@
     <Compile Include="Repository\CryptoLearn\SectionRepository.cs" />
     <Compile Include="Repository\General\Repository.cs" />
     <Compile Include="Services\CryptoLearn\LessonDetailsService.cs" />
+    <Compile Include="Services\CryptoLearn\LessonLikeService.cs" />
     <Compile Include="Services\CryptoLearn\LessonViewServices.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
   </ItemGroup>

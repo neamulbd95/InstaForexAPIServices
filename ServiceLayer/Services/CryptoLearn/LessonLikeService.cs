@@ -1,0 +1,24 @@
+﻿using DAL.Domain.CryptoLearn;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Unity;
+
+namespace ServiceLayer.Services.CryptoLearn
+{
+    public static class LessonLikeService
+    {
+        public static LessonLike AddLike(int lessonId, int deviceId)
+        {
+            IUnityContainer container = new UnityContainer();
+            var likes = container.Resolve<LessonLike>();
+
+            likes.LessonId = lessonId;
+            likes.DeviceId = deviceId;
+            likes.CheckLike = true;
+            return likes;
+        }
+    }
+}
