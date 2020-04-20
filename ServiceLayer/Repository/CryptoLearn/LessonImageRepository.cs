@@ -3,11 +3,8 @@ using DAL.Domain.CryptoLearn;
 using DAL.IRepositories.CryptoLearn;
 using ServiceLayer.Repository.General;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ServiceLayer.Repository.CryptoLearn
 {

@@ -1,11 +1,8 @@
 ﻿using DAL.Domain.CryptoLearn;
 using DAL.UnitOfWork;
 using InstaForexAPIServices.Response;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using Unity;
 
