@@ -49,3 +49,7 @@ namespace DAL.Context.CryptoLearn
         }
     }
 }
+
+//Enable-Migrations -ContextTypeName:DAL.Context.CryptoLearn.CryptoLearnContext
+//Add-Migration -Configuration DAL.CryptoLearnMigration.Configuration AddingTablesToDatabase
+//Update-Database -Configuration DAL.CryptoLearnMigration.Configuration -Verbose

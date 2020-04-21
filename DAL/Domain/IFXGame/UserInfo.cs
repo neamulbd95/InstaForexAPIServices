@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DAL.Domain.IFXGame
+﻿namespace DAL.Domain.IFXGame
 {
     public class UserInfo
     {
@@ -12,6 +6,9 @@ namespace DAL.Domain.IFXGame
         public string AccountNumber { get; set; }
         public string NickName { get; set; }
         public bool ActiveStatus { get; set; }
+
+        public UserAccount UserAccount { get; set; }
+        public UserToken UserToken { get; set; }
 
     }
 }

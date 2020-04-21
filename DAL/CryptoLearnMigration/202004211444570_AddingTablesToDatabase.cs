@@ -1,8 +1,9 @@
-﻿namespace DAL.Migrations
+﻿namespace DAL.CryptoLearnMigration
 {
+    using System;
     using System.Data.Entity.Migrations;
-
-    public partial class AddingTablesToTheDatabase : DbMigration
+    
+    public partial class AddingTablesToDatabase : DbMigration
     {
         public override void Up()
         {
@@ -38,9 +39,9 @@
                         LessonName = c.String(nullable: false, maxLength: 255),
                         SectionId = c.Int(nullable: false),
                         LanguageId = c.Int(nullable: false),
-                        ImageId = c.Int(nullable: false),
-                        ReadDuration = c.String(nullable: false, maxLength: 255),
-                        AddTime = c.Int(nullable: false),
+                        ImageId = c.Int(nullable: true),
+                        ReadDuration = c.String(nullable: false, maxLength: 255,defaultValue:""),
+                        AddTime = c.Int(nullable: false, defaultValue: (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).Minutes),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Images", t => t.ImageId, cascadeDelete: true)

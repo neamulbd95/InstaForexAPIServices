@@ -93,6 +93,14 @@
     <Compile Include="Context\CryptoLearn\Configuration\LessonViewConfiguration.cs" />
     <Compile Include="Context\CryptoLearn\Configuration\SectionConfiguration.cs" />
     <Compile Include="Context\CryptoLearn\CryptoLearnContext.cs" />
+    <Compile Include="Context\IFXGame\Configuration\UserInfoConfiguration.cs" />
+    <Compile Include="Context\IFXGame\Configuration\UserTokenConfiguration.cs" />
+    <Compile Include="Context\IFXGame\IFXGameContext.cs" />
+    <Compile Include="CryptoLearnMigration\202004211444570_AddingTablesToDatabase.cs" />
+    <Compile Include="CryptoLearnMigration\202004211444570_AddingTablesToDatabase.designer.cs">
+      <DependentUpon>202004211444570_AddingTablesToDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CryptoLearnMigration\Configuration.cs" />
     <Compile Include="Domain\CryptoLearn\Device.cs" />
     <Compile Include="Domain\CryptoLearn\Image.cs" />
     <Compile Include="Domain\CryptoLearn\Language.cs" />
@@ -107,6 +115,11 @@
     <Compile Include="Domain\IFXGame\UserAccount.cs" />
     <Compile Include="Domain\IFXGame\UserInfo.cs" />
     <Compile Include="Domain\IFXGame\UserToken.cs" />
+    <Compile Include="IFXGameMigration\202004211458421_AddingTablesToDatabase.cs" />
+    <Compile Include="IFXGameMigration\202004211458421_AddingTablesToDatabase.designer.cs">
+      <DependentUpon>202004211458421_AddingTablesToDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IFXGameMigration\Configuration.cs" />
     <Compile Include="IRepositories\CryptoLearn\IDeviceRepository.cs" />
     <Compile Include="IRepositories\CryptoLearn\ILanguageRepository.cs" />
     <Compile Include="IRepositories\CryptoLearn\ILessonDescriptionRepository.cs" />
@@ -117,11 +130,6 @@
     <Compile Include="IRepositories\CryptoLearn\ISectionRepository.cs" />
     <Compile Include="IRepositories\CryptoLearn\ILessonViewRepository.cs" />
     <Compile Include="IRepositories\General\IRepository.cs" />
-    <Compile Include="Migrations\202004121749495_AddingTablesToTheDatabase.cs" />
-    <Compile Include="Migrations\202004121749495_AddingTablesToTheDatabase.designer.cs">
-      <DependentUpon>202004121749495_AddingTablesToTheDatabase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />
   </ItemGroup>
@@ -130,11 +138,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202004121749495_AddingTablesToTheDatabase.resx">
-      <DependentUpon>202004121749495_AddingTablesToTheDatabase.cs</DependentUpon>
+    <EmbeddedResource Include="CryptoLearnMigration\202004211444570_AddingTablesToDatabase.resx">
+      <DependentUpon>202004211444570_AddingTablesToDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IFXGameMigration\202004211458421_AddingTablesToDatabase.resx">
+      <DependentUpon>202004211458421_AddingTablesToDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
