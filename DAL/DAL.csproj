@@ -104,6 +104,9 @@
     <Compile Include="Domain\CryptoLearn\LessonQuestionOption.cs" />
     <Compile Include="Domain\CryptoLearn\LessonView.cs" />
     <Compile Include="Domain\CryptoLearn\Section.cs" />
+    <Compile Include="Domain\IFXGame\UserAccount.cs" />
+    <Compile Include="Domain\IFXGame\UserInfo.cs" />
+    <Compile Include="Domain\IFXGame\UserToken.cs" />
     <Compile Include="IRepositories\CryptoLearn\IDeviceRepository.cs" />
     <Compile Include="IRepositories\CryptoLearn\ILanguageRepository.cs" />
     <Compile Include="IRepositories\CryptoLearn\ILessonDescriptionRepository.cs" />
