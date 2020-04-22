@@ -9,8 +9,9 @@ namespace ServiceLayer.UnitOfWork
     {
         private readonly IFXGameContext context;
 
-        public UnitOfWorkIFXGame()
+        public UnitOfWorkIFXGame(IFXGameContext _context)
         {
+            this.context = _context;
             UserInfo = new UserInfoRepository(context);
             UserToken = new UserTokenRepository(context);
         }
