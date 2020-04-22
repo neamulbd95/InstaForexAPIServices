@@ -179,6 +179,7 @@
     <Compile Include="Controllers\CryptoLearn\LessonLikeViewController.cs" />
     <Compile Include="Controllers\CryptoLearn\LessonUpdateController.cs" />
     <Compile Include="Controllers\CryptoLearn\LessonViewController.cs" />
+    <Compile Include="Controllers\IFXGame\UserInfoController.cs" />
     <Compile Include="ENum\LessonUpdateENum.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -190,6 +191,7 @@
     <Compile Include="Response\CryptoLearn\LessonUpdateStatus.cs" />
     <Compile Include="Response\CryptoLearn\UpdatedLesson.cs" />
     <Compile Include="Response\GeneralResponse.cs" />
+    <Compile Include="Response\IFXGame\ErroMessage.cs" />
     <Compile Include="Unity\UnityResolver.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -332,7 +334,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\IFXGame\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
