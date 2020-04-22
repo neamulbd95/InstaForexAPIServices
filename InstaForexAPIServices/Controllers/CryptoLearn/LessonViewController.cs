@@ -9,7 +9,7 @@ using System.Web.Http;
 using System.Net;
 using Unity;
 
-namespace InstaForexAPIServices.Controllers
+namespace InstaForexAPIServices.Controllers.CryptoLearn
 {
     public class LessonViewController : ApiController
     {

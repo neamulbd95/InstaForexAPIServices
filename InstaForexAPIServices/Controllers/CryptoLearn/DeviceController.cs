@@ -6,7 +6,7 @@ using System.Net;
 using System.Web.Http;
 using Unity;
 
-namespace InstaForexAPIServices.Controllers
+namespace InstaForexAPIServices.Controllers.CryptoLearn
 {
     public class DeviceController : ApiController
     {

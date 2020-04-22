@@ -172,13 +172,13 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\DeviceController.cs" />
-    <Compile Include="Controllers\LessonController.cs" />
-    <Compile Include="Controllers\LessonDescriptionController.cs" />
-    <Compile Include="Controllers\LessonLikeController.cs" />
-    <Compile Include="Controllers\LessonLikeViewController.cs" />
-    <Compile Include="Controllers\LessonUpdateController.cs" />
-    <Compile Include="Controllers\LessonViewController.cs" />
+    <Compile Include="Controllers\CryptoLearn\DeviceController.cs" />
+    <Compile Include="Controllers\CryptoLearn\LessonController.cs" />
+    <Compile Include="Controllers\CryptoLearn\LessonDescriptionController.cs" />
+    <Compile Include="Controllers\CryptoLearn\LessonLikeController.cs" />
+    <Compile Include="Controllers\CryptoLearn\LessonLikeViewController.cs" />
+    <Compile Include="Controllers\CryptoLearn\LessonUpdateController.cs" />
+    <Compile Include="Controllers\CryptoLearn\LessonViewController.cs" />
     <Compile Include="ENum\LessonUpdateENum.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
