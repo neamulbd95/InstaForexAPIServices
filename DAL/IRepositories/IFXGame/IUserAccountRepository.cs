@@ -3,7 +3,7 @@ using DAL.IRepositories.General;
 
 namespace DAL.IRepositories.IFXGame
 {
-    interface IUserAccountRepository : IRepository<UserAccount>
+    public interface IUserAccountRepository : IRepository<UserAccount>
     {
         void UpdateUserAccount(UserAccount account);
     }
