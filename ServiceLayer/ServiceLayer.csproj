@@ -98,10 +98,13 @@
     <Compile Include="Repository\CryptoLearn\LessonViewRepository.cs" />
     <Compile Include="Repository\CryptoLearn\SectionRepository.cs" />
     <Compile Include="Repository\General\Repository.cs" />
+    <Compile Include="Repository\IFXGame\UserInfoRepository.cs" />
+    <Compile Include="Repository\IFXGame\UserTokenRepository.cs" />
     <Compile Include="Services\CryptoLearn\LessonDetailsService.cs" />
     <Compile Include="Services\CryptoLearn\LessonLikeService.cs" />
     <Compile Include="Services\CryptoLearn\LessonViewServices.cs" />
     <Compile Include="UnitOfWork\UnitOfWorkCryptoLearn.cs" />
+    <Compile Include="UnitOfWork\UnitOfWorkIFXGame.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">

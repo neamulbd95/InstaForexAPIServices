@@ -130,7 +130,6 @@
     <Compile Include="IRepositories\CryptoLearn\ISectionRepository.cs" />
     <Compile Include="IRepositories\CryptoLearn\ILessonViewRepository.cs" />
     <Compile Include="IRepositories\General\IRepository.cs" />
-    <Compile Include="IRepositories\IFXGame\IUserAccountRepository.cs" />
     <Compile Include="IRepositories\IFXGame\IUserInfoRepository.cs" />
     <Compile Include="IRepositories\IFXGame\IUserTokenRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
