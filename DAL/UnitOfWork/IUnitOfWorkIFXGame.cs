@@ -7,5 +7,7 @@ namespace DAL.UnitOfWork
     {
         IUserInfoRepository UserInfo { get; }
         IUserTokenRepository UserToken { get; }
+
+        int Complete();
     }
 }
