@@ -101,7 +101,7 @@
     <Compile Include="Services\CryptoLearn\LessonDetailsService.cs" />
     <Compile Include="Services\CryptoLearn\LessonLikeService.cs" />
     <Compile Include="Services\CryptoLearn\LessonViewServices.cs" />
-    <Compile Include="UnitOfWork\UnitOfWork.cs" />
+    <Compile Include="UnitOfWork\UnitOfWorkCryptoLearn.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">

@@ -9,10 +9,10 @@ namespace InstaForexAPIServices.Controllers
 {
     public class LessonController : ApiController 
     {
-        private readonly IUnitOfWork _unitofwork;
+        private readonly IUnitOfWorkCryptoLearn _unitofwork;
         IUnityContainer container = new UnityContainer();
 
-        public LessonController(IUnitOfWork unitofwork)
+        public LessonController(IUnitOfWorkCryptoLearn unitofwork)
         {
             this._unitofwork = unitofwork;
         }

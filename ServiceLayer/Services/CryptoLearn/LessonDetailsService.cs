@@ -7,7 +7,7 @@ namespace ServiceLayer.Services.CryptoLearn
 {
     public static class LessonDetailsService
     {
-        public static LessonUpdateDetails GetLessonDetails(IUnitOfWork _unitOfWork, Lesson lesson, int langId)
+        public static LessonUpdateDetails GetLessonDetails(IUnitOfWorkCryptoLearn _unitOfWork, Lesson lesson, int langId)
         {
             IUnityContainer container = new UnityContainer();
             var updatedLesson = container.Resolve<LessonUpdateDetails>();

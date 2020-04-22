@@ -5,11 +5,11 @@ using ServiceLayer.Repository.CryptoLearn;
 
 namespace ServiceLayer.UnitOfWork
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWorkCryptoLearn : IUnitOfWorkCryptoLearn
     {
         private readonly CryptoLearnContext context;
 
-        public UnitOfWork(CryptoLearnContext _context)
+        public UnitOfWorkCryptoLearn(CryptoLearnContext _context)
         {
             this.context = _context;
             Devices = new DeviceRepository(context);

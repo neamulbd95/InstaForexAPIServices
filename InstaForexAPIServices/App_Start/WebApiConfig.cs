@@ -12,7 +12,7 @@ namespace InstaForexAPIServices
         {
             // Web API configuration and services
             var container = new UnityContainer();
-            container.RegisterType<IUnitOfWork, UnitOfWork>();
+            container.RegisterType<IUnitOfWorkCryptoLearn, UnitOfWorkCryptoLearn>();
             config.DependencyResolver = new UnityResolver(container);
 
             // Web API routes

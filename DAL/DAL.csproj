@@ -134,7 +134,7 @@
     <Compile Include="IRepositories\IFXGame\IUserInfoRepository.cs" />
     <Compile Include="IRepositories\IFXGame\IUserTokenRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\IUnitOfWorkCryptoLearn.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

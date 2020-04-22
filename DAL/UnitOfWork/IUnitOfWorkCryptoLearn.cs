@@ -3,7 +3,7 @@ using System;
 
 namespace DAL.UnitOfWork
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWorkCryptoLearn : IDisposable
     {
         IDeviceRepository Devices { get; }
         ILanguageRepository Languages { get; }
