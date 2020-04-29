@@ -179,7 +179,7 @@ namespace InstaForexAPIServices
                         // The file must be included in your project as an "Embedded Resource", and then the resource's
                         // "Logical Name" is passed to the method as shown below.
                         //
-                        //c.InjectStylesheet(containingAssembly, "Swashbuckle.Dummy.SwaggerExtensions.testStyles1.css");
+                        c.InjectStylesheet(typeof(SwaggerConfig).Assembly, "InstaForexAPIServices.InstaForexAPIServices.Content.CustomSwagger.css");
 
                         // Use the "InjectJavaScript" option to invoke one or more custom JavaScripts after the swagger-ui
                         // has loaded. The file must be included in your project as an "Embedded Resource", and then the resource's
@@ -240,8 +240,14 @@ namespace InstaForexAPIServices
                         // "apiKeyIn" can either be "query" or "header"                                                
                         //
                         //c.EnableApiKeySupport("apiKey", "header");
-                        c.InjectJavaScript(thisAssembly, "InstaForexAPIServices.Content.CustomSwagger.css");
+                        c.InjectStylesheet(thisAssembly, "InstaForexAPIServices.Content.CustomSwagger.css");
                     });
+
+            /*GlobalConfiguration.Configuration.EnableSwaggerUi(c =>
+            {
+                
+            }*/
+
         }
     }
 }
