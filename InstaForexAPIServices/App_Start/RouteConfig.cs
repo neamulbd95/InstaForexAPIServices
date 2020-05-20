@@ -10,6 +10,12 @@ namespace InstaForexAPIServices
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                "IFXGame",
+                "IFXGame/Doc/Swagger",
+                new { controller = "IFXGame", action = "RedirectToSwaggerUi" }
+                );
+
+            routes.MapRoute(
             "Help Area",
             "",
             new { controller = "Help", action = "Index" }

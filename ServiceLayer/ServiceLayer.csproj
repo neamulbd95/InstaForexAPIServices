@@ -103,6 +103,7 @@
     <Compile Include="Services\CryptoLearn\LessonDetailsService.cs" />
     <Compile Include="Services\CryptoLearn\LessonLikeService.cs" />
     <Compile Include="Services\CryptoLearn\LessonViewServices.cs" />
+    <Compile Include="TokenGenerator\TokenGenerator.cs" />
     <Compile Include="UnitOfWork\UnitOfWorkCryptoLearn.cs" />
     <Compile Include="UnitOfWork\UnitOfWorkIFXGame.cs" />
   </ItemGroup>

@@ -1,6 +1,7 @@
 ﻿using DAL.UnitOfWork;
 using InstaForexAPIServices.Unity;
 using ServiceLayer.UnitOfWork;
+using Swagger.Net.Application;
 using System.Web.Http;
 using Unity;
 

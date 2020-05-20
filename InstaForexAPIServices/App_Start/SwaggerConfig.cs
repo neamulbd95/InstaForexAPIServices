@@ -1,7 +1,14 @@
+using System;
+using System.Linq;
+using System.Web;
 using System.Web.Http;
-using WebActivatorEx;
+using System.Web.Http.Description;
+using System.Web.Http.Routing.Constraints;
+using System.Collections.Generic;
+
 using InstaForexAPIServices;
-using Swashbuckle.Application;
+using Swagger.Net.Application;
+using Swagger.Net;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
@@ -13,7 +20,7 @@ namespace InstaForexAPIServices
         {
             var thisAssembly = typeof(SwaggerConfig).Assembly;
 
-            GlobalConfiguration.Configuration 
+            GlobalConfiguration.Configuration
                 .EnableSwagger(c =>
                     {
                         // By default, the service root url is inferred from the request used to access the docs.
@@ -21,6 +28,7 @@ namespace InstaForexAPIServices
                         // resolve correctly. You can workaround this by providing your own code to determine the root URL.
                         //
                         //c.RootUrl(req => GetRootUrlFromAppConfig());
+
 
                         // If schemes are not explicitly provided in a Swagger 2.0 document, then the scheme used to access
                         // the docs is taken as the default. If your API supports multiple schemes and you want to be explicit
@@ -34,8 +42,16 @@ namespace InstaForexAPIServices
                         //
                         c.SingleApiVersion("v1", "InstaForexAPIServices");
 
+                        // Taking to long to load the swagger docs? Enable this option to start caching it
+                        //
+                        //c.AllowCachingSwaggerDoc();
+
+                        // If you want the output Swagger docs to be indented properly, enable the "PrettyPrint" option.
+                        //
+                        c.PrettyPrint();
+
                         // If your API has multiple versions, use "MultipleApiVersions" instead of "SingleApiVersion".
-                        // In this case, you must provide a lambda that tells Swashbuckle which actions should be
+                        // In this case, you must provide a lambda that tells Swagger-Net which actions should be
                         // included in the docs for a given API version. Like "SingleApiVersion", each call to "Version"
                         // returns an "Info" builder so you can provide additional metadata per API version.
                         //
@@ -43,8 +59,8 @@ namespace InstaForexAPIServices
                         //    (apiDesc, targetApiVersion) => ResolveVersionSupportByRouteConstraint(apiDesc, targetApiVersion),
                         //    (vc) =>
                         //    {
-                        //        vc.Version("v2", "Swashbuckle Dummy API V2");
-                        //        vc.Version("v1", "Swashbuckle Dummy API V1");
+                        //        vc.Version("app1", "CryptoLearn");
+                        //        vc.Version("app2", "IFXGame");
                         //    });
 
                         // You can use "BasicAuth", "ApiKey" or "OAuth2" options to describe security schemes for the API.
@@ -54,14 +70,9 @@ namespace InstaForexAPIServices
                         // you'll need to implement a custom IDocumentFilter and/or IOperationFilter to set these properties
                         // according to your specific authorization implementation
                         //
-                        //c.BasicAuth("basic")
-                        //    .Description("Basic HTTP Authentication");
+                        //c.BasicAuth("basic").Description("Basic HTTP Authentication");
                         //
-						// NOTE: You must also configure 'EnableApiKeySupport' below in the SwaggerUI section
-                        //c.ApiKey("apiKey")
-                        //    .Description("API Key Authentication")
-                        //    .Name("apiKey")
-                        //    .In("header");
+                        //c.ApiKey("apiKey", "header", "API Key Authentication");
                         //
                         //c.OAuth2("oauth2")
                         //    .Description("OAuth2 Implicit Grant")
@@ -76,6 +87,9 @@ namespace InstaForexAPIServices
 
                         // Set this flag to omit descriptions for any actions decorated with the Obsolete attribute
                         //c.IgnoreObsoleteActions();
+
+                        // Comment this setting to disable Access-Control-Allow-Origin
+                        c.AccessControlAllowOrigin("*");
 
                         // Each operation be assigned one or more tags which are then used by consumers for various reasons.
                         // For example, the swagger-ui groups operations according to the first tag of each operation.
@@ -92,14 +106,17 @@ namespace InstaForexAPIServices
                         //
                         //c.OrderActionGroupsBy(new DescendingAlphabeticComparer());
 
-                        // If you annotate Controllers and API Types with
-                        // Xml comments (http://msdn.microsoft.com/en-us/library/b2s063f7(v=vs.110).aspx), you can incorporate
-                        // those comments into the generated docs and UI. You can enable this by providing the path to one or
+                        // If you annotate Controllers and API Types with Xml comments:
+                        // http://msdn.microsoft.com/en-us/library/b2s063f7(v=vs.110).aspx
+                        // those comments will be incorporated into the generated docs and UI.
+                        // Just make sure your comment file(s) have extension .XML
+                        // You can add individual files by providing the path to one or
                         // more Xml comment files.
                         //
-                        //c.IncludeXmlComments(GetXmlCommentsPath());
+                        //c.IncludeXmlComments(AppDomain.CurrentDomain.BaseDirectory + "file.ext");
+                        c.IncludeAllXmlComments(thisAssembly, AppDomain.CurrentDomain.BaseDirectory);
 
-                        // Swashbuckle makes a best attempt at generating Swagger compliant JSON schemas for the various types
+                        // Swagger-Net makes a best attempt at generating Swagger compliant JSON schemas for the various types
                         // exposed in your API. However, there may be occasions when more control of the output is needed.
                         // This is supported through the "MapType" and "SchemaFilter" options:
                         //
@@ -118,7 +135,7 @@ namespace InstaForexAPIServices
                         //c.SchemaFilter<ApplySchemaVendorExtensions>();
 
                         // In a Swagger 2.0 document, complex types are typically declared globally and referenced by unique
-                        // Schema Id. By default, Swashbuckle does NOT use the full type name in Schema Ids. In most cases, this
+                        // Schema Id. By default, Swagger-Net does NOT use the full type name in Schema Ids. In most cases, this
                         // works well because it prevents the "implementation detail" of type namespaces from leaking into your
                         // Swagger docs and UI. However, if you have multiple types in your API with the same class name, you'll
                         // need to opt out of this behavior to avoid Schema Id conflicts.
@@ -127,21 +144,25 @@ namespace InstaForexAPIServices
 
                         // Alternatively, you can provide your own custom strategy for inferring SchemaId's for
                         // describing "complex" types in your API.
-                        //  
+                        //
                         //c.SchemaId(t => t.FullName.Contains('`') ? t.FullName.Substring(0, t.FullName.IndexOf('`')) : t.FullName);
 
                         // Set this flag to omit schema property descriptions for any type properties decorated with the
-                        // Obsolete attribute 
+                        // Obsolete attribute
                         //c.IgnoreObsoleteProperties();
 
-                        // In accordance with the built in JsonSerializer, Swashbuckle will, by default, describe enums as integers.
-                        // You can change the serializer behavior by configuring the StringToEnumConverter globally or for a given
-                        // enum type. Swashbuckle will honor this change out-of-the-box. However, if you use a different
-                        // approach to serialize enums as strings, you can also force Swashbuckle to describe them as strings.
-                        // 
-                        //c.DescribeAllEnumsAsStrings();
+                        // Set this flag to ignore IsSpecified members when serializing and deserializing types.
+                        //
+                        c.IgnoreIsSpecifiedMembers();
 
-                        // Similar to Schema filters, Swashbuckle also supports Operation and Document filters:
+                        // In accordance with the built in JsonSerializer, if disabled Swagger-Net will describe enums as integers.
+                        // You can change the serializer behavior by configuring the StringToEnumConverter globally or for a given
+                        // enum type. Swagger-Net will honor this change out-of-the-box. However, if you use a different
+                        // approach to serialize enums as strings, you can also force Swagger-Net to describe them as strings.
+                        //
+                        c.DescribeAllEnumsAsStrings(camelCase: false);
+
+                        // Similar to Schema filters, Swagger-Net also supports Operation and Document filters:
                         //
                         // Post-modify Operation descriptions once they've been generated by wiring up one or more
                         // Operation filters.
@@ -162,9 +183,9 @@ namespace InstaForexAPIServices
                         //c.DocumentFilter<ApplyDocumentVendorExtensions>();
 
                         // In contrast to WebApi, Swagger 2.0 does not include the query string component when mapping a URL
-                        // to an action. As a result, Swashbuckle will raise an exception if it encounters multiple actions
+                        // to an action. As a result, Swagger-Net will raise an exception if it encounters multiple actions
                         // with the same path (sans query string) and HTTP method. You can workaround this by providing a
-                        // custom strategy to pick a winner or merge the descriptions for the purposes of the Swagger docs 
+                        // custom strategy to pick a winner or merge the descriptions for the purposes of the Swagger docs
                         //
                         //c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
 
@@ -175,17 +196,35 @@ namespace InstaForexAPIServices
                     })
                 .EnableSwaggerUi(c =>
                     {
+                        // Use the "DocumentTitle" option to change the Document title.
+                        // Very helpful when you have multiple Swagger pages open, to tell them apart.
+                        //
+                        c.DocumentTitle("InstaForex");
+                        c.EnableDiscoveryUrlSelector();
+
+                        // Use the "CssTheme" to add a theme to your UI.
+                        // Options are:
+                        //    theme-feeling-blue-css
+                        //    theme-flattop-css
+                        //    theme-material-css
+                        //    theme-monokai-css
+                        //    theme-muted-css
+                        //    theme-newspaper-css
+                        //    theme-outline-css
+                        //
+                        //c.CssTheme("");
+
                         // Use the "InjectStylesheet" option to enrich the UI with one or more additional CSS stylesheets.
                         // The file must be included in your project as an "Embedded Resource", and then the resource's
                         // "Logical Name" is passed to the method as shown below.
                         //
-                        c.InjectStylesheet(typeof(SwaggerConfig).Assembly, "InstaForexAPIServices.InstaForexAPIServices.Content.CustomSwagger.css");
+                        //c.InjectStylesheet(thisAssembly, "Swagger.Net.Dummy.SwaggerExtensions.testStyles1.css");
 
                         // Use the "InjectJavaScript" option to invoke one or more custom JavaScripts after the swagger-ui
                         // has loaded. The file must be included in your project as an "Embedded Resource", and then the resource's
                         // "Logical Name" is passed to the method as shown above.
                         //
-                        //c.InjectJavaScript(thisAssembly, "Swashbuckle.Dummy.SwaggerExtensions.testScript1.js");
+                        //c.InjectJavaScript(thisAssembly, "Swagger.Net.Dummy.SwaggerExtensions.testScript1.js");
 
                         // The swagger-ui renders boolean data types as a dropdown. By default, it provides "true" and "false"
                         // strings as the possible choices. You can use this option to change these to something else,
@@ -193,10 +232,19 @@ namespace InstaForexAPIServices
                         //
                         //c.BooleanValues(new[] { "0", "1" });
 
+                        // Controls the display of vendor extension (x-) fields and values for Operations, Parameters, and Schema.
+                        // The default is true.
+                        //
+                        c.ShowExtensions(true);
+
+                        // Show pattern, minLength, maxLength, minimum, and maximum fields
+                        //
+                        //c.ShowCommonExtensions(true);
+
                         // By default, swagger-ui will validate specs against swagger.io's online validator and display the result
                         // in a badge at the bottom of the page. Use these options to set a different validator URL or to disable the
                         // feature entirely.
-                        //c.SetValidatorUrl("http://localhost/validator");
+                        c.SetValidatorUrl("https://online.swagger.io/validator");
                         //c.DisableValidator();
 
                         // Use this option to control how the Operation listing is displayed.
@@ -205,18 +253,40 @@ namespace InstaForexAPIServices
                         //
                         //c.DocExpansion(DocExpansion.List);
 
-                        // Specify which HTTP operations will have the 'Try it out!' option. An empty paramter list disables
+                        // Controls how models are shown when the API is first rendered. (The user can always switch
+                        // the rendering for a given model by clicking the 'Model' and 'Example Value' links.) It can be
+                        // set to 'model' or 'example', and the default is 'example'.
+                        //
+                        //c.DefaultModelRendering(DefaultModelRender.Model);
+
+                        // Use this option to control the expansion depth for the model on the model-example section.
+                        //
+                        //c.DefaultModelExpandDepth(0);
+
+                        // The default expansion depth for models (set to -1 completely hide the models).
+                        //
+                        //c.DefaultModelsExpandDepth(0);
+
+                        // Limit the number of operations shown to a smaller value
+                        //
+                        c.UImaxDisplayedTags(100);
+
+                        // Filter the operations works as a search, to disable set to "null"
+                        //
+                        c.UIfilter("''");
+
+                        // Specify which HTTP operations will have the 'Try it out!' option. An empty parameter list disables
                         // it for all operations.
                         //
                         //c.SupportedSubmitMethods("GET", "HEAD");
 
                         // Use the CustomAsset option to provide your own version of assets used in the swagger-ui.
-                        // It's typically used to instruct Swashbuckle to return your version instead of the default
+                        // It's typically used to instruct Swagger-Net to return your version instead of the default
                         // when a request is made for "index.html". As with all custom content, the file must be included
                         // in your project as an "Embedded Resource", and then the resource's "Logical Name" is passed to
                         // the method as shown below.
                         //
-                        //c.CustomAsset("index", containingAssembly, "YourWebApiProject.SwaggerExtensions.index.html");
+                        //c.CustomAsset("index", thisAssembly, "YourWebApiProject.SwaggerExtensions.index.html");
 
                         // If your API has multiple versions and you've applied the MultipleApiVersions setting
                         // as described above, you can also enable a select box in the swagger-ui, that displays
@@ -235,19 +305,72 @@ namespace InstaForexAPIServices
                         //    appName: "Swagger UI"
                         //    //additionalQueryStringParams: new Dictionary<string, string>() { { "foo", "bar" } }
                         //);
-
-                        // If your API supports ApiKey, you can override the default values.
-                        // "apiKeyIn" can either be "query" or "header"                                                
-                        //
-                        //c.EnableApiKeySupport("apiKey", "header");
-                        c.InjectStylesheet(thisAssembly, "InstaForexAPIServices.Content.CustomSwagger.css");
                     });
+        }
 
-            /*GlobalConfiguration.Configuration.EnableSwaggerUi(c =>
+        public static bool ResolveVersionSupportByRouteConstraint(ApiDescription apiDesc, string targetApiVersion)
+        {
+            return (apiDesc.Route.RouteTemplate.ToLower().Contains(targetApiVersion.ToLower()));
+        }
+
+        private class ApplyDocumentVendorExtensions : IDocumentFilter
+        {
+            public void Apply(SwaggerDocument swaggerDoc, SchemaRegistry schemaRegistry, IApiExplorer apiExplorer)
             {
-                
-            }*/
+                // Include the given data type in the final SwaggerDocument
+                //
+                //schemaRegistry.GetOrRegister(typeof(ExtraType));
+            }
+        }
 
+        public class AssignOAuth2SecurityRequirements : IOperationFilter
+        {
+            public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
+            {
+                // Correspond each "Authorize" role to an oauth2 scope
+                var scopes = apiDescription.ActionDescriptor.GetFilterPipeline()
+                    .Select(filterInfo => filterInfo.Instance)
+                    .OfType<AuthorizeAttribute>()
+                    .SelectMany(attr => attr.Roles.Split(','))
+                    .Distinct();
+
+                if (scopes.Any())
+                {
+                    if (operation.security == null)
+                        operation.security = new List<IDictionary<string, IEnumerable<string>>>();
+
+                    var oAuthRequirements = new Dictionary<string, IEnumerable<string>>
+                    {
+                        { "oauth2", scopes }
+                    };
+
+                    operation.security.Add(oAuthRequirements);
+                }
+            }
+        }
+
+        private class ApplySchemaVendorExtensions : ISchemaFilter
+        {
+            public void Apply(Schema schema, SchemaRegistry schemaRegistry, Type type)
+            {
+                // Modify the example values in the final SwaggerDocument
+                //
+                if (schema.properties != null)
+                {
+                    foreach (var p in schema.properties)
+                    {
+                        switch (p.Value.format)
+                        {
+                            case "int32":
+                                p.Value.example = 123;
+                                break;
+                            case "double":
+                                p.Value.example = 9858.216;
+                                break;
+                        }
+                    }
+                }
+            }
         }
     }
 }

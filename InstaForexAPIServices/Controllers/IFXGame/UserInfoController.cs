@@ -1,9 +1,14 @@
-﻿using DAL.UnitOfWork;
+﻿using DAL.Domain.IFXGame;
+using DAL.UnitOfWork;
+using InstaForexAPIServices.RequestInputClass.IFXGame;
 using InstaForexAPIServices.Response;
 using InstaForexAPIServices.Response.IFXGame;
+using ServiceLayer.TokenGenerator;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Web.Http;
+using System.Web.Http.Description;
 using Unity;
 
 namespace InstaForexAPIServices.Controllers.IFXGame
@@ -57,6 +62,70 @@ namespace InstaForexAPIServices.Controllers.IFXGame
                     result.Result = (IEnumerable<ErroMessage>)message;
                     return result;
                 }
+            }
+        }
+
+        
+        [HttpPost]
+        [Route("api/IFXGame/v1/AddUser")]
+        public GeneralResponse<ResponseUserInfo> AddingUser(UserInfoRequest u)
+        {
+            var result = container.Resolve<GeneralResponse<ResponseUserInfo>>();
+            if (!ModelState.IsValid)
+            {
+                result.ResponseCode = HttpStatusCode.BadRequest;
+                result.ResponseMessage = "Request is wrong";
+                result.Result = null;
+                return result;
+            }
+
+            try
+            {
+                var user = _unitOfWork.UserInfo.GetSingle(x => x.NickName.ToUpper() == u.NickName.ToUpper());
+                var message = container.Resolve<ErroMessage>();
+
+                if (user != null)
+                {
+                    result.ResponseCode = HttpStatusCode.Conflict;
+                    result.ResponseMessage = "Request is okay and This nick name is already existed.";
+                    result.Result = null;
+                    return result;
+                }
+
+                user.NickName = u.NickName;
+                user.AccountNumber = u.AccountNumber;
+                user.ActiveStatus = true;
+
+                _unitOfWork.UserInfo.Add(user);
+                _unitOfWork.Complete();
+
+                var token = container.Resolve<UserToken>();
+
+                token.UserInfoId = user.Id;
+                token.Token = String.Concat(TokenGenerator.Generate(32), user.NickName);
+
+                _unitOfWork.UserToken.Add(token);
+                _unitOfWork.Complete();
+
+                var UserResponse = container.Resolve<ResponseUserInfo>();
+
+                UserResponse.Id = user.Id;
+                UserResponse.AccountNumber = user.AccountNumber;
+                UserResponse.NickName = user.NickName;
+                UserResponse.ActivityStatus = user.ActiveStatus;
+                UserResponse.UserToken = token.Token;
+
+                result.ResponseCode = HttpStatusCode.OK;
+                result.ResponseMessage = "User has been added";
+                result.Result = (IEnumerable<ResponseUserInfo>)UserResponse;
+                return result;
+            }
+            catch
+            {
+                result.ResponseCode = HttpStatusCode.BadRequest;
+                result.ResponseMessage = "Something went wrong";
+                result.Result = null;
+                return result;
             }
         }
     }
