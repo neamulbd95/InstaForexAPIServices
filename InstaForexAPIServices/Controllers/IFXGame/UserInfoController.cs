@@ -128,5 +128,67 @@ namespace InstaForexAPIServices.Controllers.IFXGame
                 return result;
             }
         }
+
+
+        [HttpPut]
+        [Route("api/IFXGame/v1/UpdateUserAccountNumber")]
+        public GeneralResponse<ResponseUserInfo> UpdateAccNumber(string userToken, UserInfoRequest userInfo)
+        {
+            var result = container.Resolve<GeneralResponse<ResponseUserInfo>>();
+            if (!ModelState.IsValid)
+            {
+                result.ResponseCode = HttpStatusCode.BadRequest;
+                result.ResponseMessage = "Request is wrong";
+                result.Result = null;
+                return result;
+            }
+
+            try
+            {
+                var token = _unitOfWork.UserToken.GetSingle(x=> x.Token == userToken);
+                if(token == null)
+                {
+                    result.ResponseCode = HttpStatusCode.NotFound;
+                    result.ResponseMessage = "Invalid User Token";
+                    result.Result = null;
+                    return result;
+                }
+
+                var user = _unitOfWork.UserInfo.GetSingle(x => x.NickName.ToUpper() == userInfo.NickName.ToUpper() && x.Id == token.UserInfoId);
+                if(user == null)
+                {
+                    result.ResponseCode = HttpStatusCode.NotFound;
+                    result.ResponseMessage = "Invalid User";
+                    result.Result = null;
+                    return result;
+                }
+
+                user.AccountNumber = userInfo.AccountNumber;
+                token.Token = String.Concat(TokenGenerator.Generate(32), user.NickName);
+
+                _unitOfWork.Complete();
+
+                var UserResponse = container.Resolve<ResponseUserInfo>();
+
+                UserResponse.Id = user.Id;
+                UserResponse.AccountNumber = user.AccountNumber;
+                UserResponse.NickName = user.NickName;
+                UserResponse.ActivityStatus = user.ActiveStatus;
+                UserResponse.UserToken = token.Token;
+
+                result.ResponseCode = HttpStatusCode.OK;
+                result.ResponseMessage = "User has been updated";
+                result.Result = (IEnumerable<ResponseUserInfo>)UserResponse;
+                return result;
+            }
+            catch
+            {
+                result.ResponseCode = HttpStatusCode.BadRequest;
+                result.ResponseMessage = "Something went wrong";
+                result.Result = null;
+                return result;
+            }
+        }
+
     }
 }
